@@ -4,15 +4,15 @@ function Chart(args){
 	this.args = {'container': null,
 		'data' : [],
 		'labels' : [],
-		'chart_width' : 750,
-		'chart_height' : 450,
+		'chart_width' : 450,
+		'chart_height' : 300,
 		'bar_width' : 20,
 		'bar_space' : 10,
 		'xdim_pad' : 30,
 		'ydim_pad' : 20,				
 		'xbar_pad' : 5,
 		'ybar_pad' : 10,
-		
+		'background_type' : 'grid',			
 		'type' : 'bar'
 	};
 	if(typeof args != 'undefined')
@@ -26,7 +26,6 @@ function Chart(args){
 
 
 Chart.prototype.init = function() {
-	console.log(this.args.container);
 	this.args.container.innerHTML = '<canvas id="chart_canvas" width="' + this.args.chart_width + '" height="' + this.args.chart_height + '" style="border: 1px solid #000; padding: 5px;"></canvas>';
 	
 	var context = document.getElementById('chart_canvas').getContext('2d');
@@ -60,18 +59,19 @@ Chart.prototype.init = function() {
 	// Making Background grid
 	//var t_yheight = this.args.chart_height -  (this.args.ydim_pad + this.args.ybar_pad );
 	var t_yheight = (this.args.ydim_pad + this.args.ybar_pad );
-	for(i = this.args.xdim_pad; i < this.args.chart_height - (this.args.ydim_pad + this.args.ybar_pad ) ; i+=30 )
+	for(i = this.args.ydim_pad; i < this.args.chart_height - (this.args.ydim_pad + this.args.ybar_pad ) ; i+=30 )
 	{
 		context.moveTo(this.args.xdim_pad, t_yheight + i);
-		context.lineTo(this.args.chart_width, t_yheight + i);
+		context.lineTo(this.args.chart_width  - (this.args.xdim_pad + this.args.xbar_pad ), t_yheight + i);
 		context.strokeStyle = "#234";
 		context.stroke();
 	}
 
-	for(i = this.args.xdim_pad; i < this.args.chart_height - (this.args.ydim_pad + this.args.ybar_pad ) ; i+=30 )
+	var t_xwidth = (this.args.xdim_pad + this.args.xbar_pad );
+	for(i = this.args.xdim_pad; i < this.args.chart_width - (this.args.xdim_pad + this.args.xbar_pad ) ; i+=30 )
 	{
-		context.moveTo(this.args.xdim_pad, t_yheight + i);
-		context.lineTo(this.args.chart_width, t_yheight + i);
+		context.moveTo(t_xwidth + i, this.args.ydim_pad);
+		context.lineTo(t_xwidth + i, this.args.chart_height - (this.args.ydim_pad + this.args.ybar_pad ));
 		context.strokeStyle = "#234";
 		context.stroke();
 	}
