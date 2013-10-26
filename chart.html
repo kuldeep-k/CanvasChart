@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Canvas Chart</title>
+<script src="canvas_chart.js"></script>
+</head>
+<body>
+<div id="chart"></div>
+
+
+
+
+<script>
+
+var chart_data = [180, 200, 170, 150, 110, 10, 124, 137, 45, 77];
+var chart_labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
+var chart = new Chart({'container': document.getElementById('chart'), 'data' : chart_data, 'labels' : chart_labels});
+chart.init();
+
+</script>
+
+</body>
+</html>
